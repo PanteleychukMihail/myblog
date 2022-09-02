@@ -4,15 +4,22 @@
 {{ super ()}}
 <p> <a href="{{url_for('admin.index')}}"> Админ панель</a></p>
 <hr>
-<h2> Список статей</h2>
-<ul class='list-posts'>
+
+<div class="container mt-5">
+    <h1>Все статьи на сайте </h1>
+
+
+<ul >
     {% for p in posts %}
     <li>
-        <p class="title"><a href="{{url_for('showPost', alias=p.url)}}">{{p.title}}</a></p>
-        <p class="announce">{{ p.text[:50] | striptags  }}</p>
+        <div class="alert alert-info">
+            <p><h2><a href="{{url_for('showPost', alias=p.url)}}"> {{p.title}}</a></h2>
+            <p >{{ p.text[:50] | striptags  }}</p>
+    </div>
     </li>
     {% endfor %}
 </ul>
+
 {% endblock %}
 
 

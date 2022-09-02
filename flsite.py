@@ -95,6 +95,17 @@ def showPost(alias):
     return render_template('post.html', menu=dbase.getMenu(), title=title, post=post)
 
 
+@app.route('/post/<path:url>', methods=["POST", "GET"])
+@login_required
+def post_delete(url):
+    url=request.form.get('url')
+    print(url, "dsdssd")
+    res = dbase.delPost(url)
+    if res:
+        print("Статья удалена успешно")
+    return redirect(url_for('index'))
+
+
 @app.route('/login', methods=["POST", "GET"])
 def login():
     if current_user.is_authenticated:
@@ -179,4 +190,4 @@ def close_db(error):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

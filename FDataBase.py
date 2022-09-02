@@ -45,6 +45,16 @@ class FDataBase:
             print("Ошибка получения статьи из БД" + str(e))
         return False, False
 
+    def delPost(self, url):
+        print (url)
+        try:
+            self.__cur.execute(f"delete FROM posts WHERE url LIKE '{url}' ")
+            self.__db.commit()
+            return True
+        except sqlite3.Error as e:
+            print("Ошибка получения статьи из БД" + str(e))
+            return False
+
     def getPostsAnonce(self):
         try:
             self.__cur.execute(f"SELECT id, title, intro, text,url FROM posts ORDER BY time DESC")
