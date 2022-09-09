@@ -1,3 +1,5 @@
+"""It's small add blog for making, edition, and deleting  articles, with authorization and registration. """
+
 import os
 import sqlite3
 
@@ -11,6 +13,7 @@ from FDataBase import FDataBase
 from forms import LoginForm, RegisterForm
 from UserLogin import UserLogin
 
+# configuration
 DATABASE = '/tmp/flsite.db'
 SECRET_KEY = config('SECRET_KEY', default='')
 MAX_CONTENT_LENGTH = 2048 * 2048
@@ -39,6 +42,7 @@ def connect_db():
 
 
 def create_db():
+    """Helper function for creating database tables"""
     db = connect_db()
     with app.open_resource('sq_db.sql', mode='r') as f:
         db.cursor().executescript(f.read())
@@ -47,6 +51,7 @@ def create_db():
 
 
 def get_db():
+    """DB connection if not already established"""
     if not hasattr(g, 'link_db'):
         g.link_db = connect_db()
     return g.link_db
@@ -57,6 +62,7 @@ dbase = None
 
 @app.before_first_request
 def before_first_request():
+    """Creating a database, tables and menus after the first run"""
     create_db()
     global dbase
     db = get_db()
@@ -66,9 +72,18 @@ def before_first_request():
 
 @app.before_request
 def before_request():
+    """DB connection before request"""
     global dbase
     db = get_db()
     dbase = FDataBase(db)
+
+
+@app.teardown_appcontext
+def close_db(error):
+    """close connection after request, if it was installed"""
+    if hasattr(g, 'link_db'):
+        g.link_db.close()
+    return ''
 
 
 @app.route('/')
@@ -201,13 +216,6 @@ def upload():
         else:
             flash("Ошибка обновления аватара", 'error')
     return redirect(url_for('profile'))
-
-
-@app.teardown_appcontext
-def close_db(error):
-    if hasattr(g, 'link_db'):
-        g.link_db.close()
-    return ''
 
 
 if __name__ == '__main__':
