@@ -7,7 +7,8 @@ admin = Blueprint('admin', __name__, template_folder='templates', static_folder=
 menu = [{'url': '.index', 'title': 'Панель'},
         {'url': '.listusers', 'title': 'Список пользователей'},
         {'url': '.listpubs', 'title': 'Список статей'},
-        {'url': '.logout', 'title': 'Выйти'}]
+        {'url': '.logout', 'title': 'Выйти'}
+        ]
 
 
 def login_admin():

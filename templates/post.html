@@ -8,8 +8,8 @@
 <div class="alert alert-info">
 <p>{{post}}</p>
 </div>
-  <a href="post/url" alias="url" class="btn btn-danger">Удалить </a>
- <a href="/post{{ post.alias }}/update" class="btn btn-success">Редактировать </a>
+  <a href="post/{{url}}/delete" class="btn btn-danger">Удалить </a>
+ <a href="post/{{url}}/update" class="btn btn-success">Редактировать </a>
 </div>
 {% endblock %}
 

@@ -7,19 +7,17 @@
 
 <div class="container mt-5">
     <h1>Все статьи на сайте </h1>
-
-
 <ul >
     {% for p in posts %}
-    <li>
-        <div class="alert alert-info">
-            <p><h2><a href="{{url_for('showPost', alias=p.url)}}"> {{p.title}}</a></h2>
-            <p >{{ p.text[:50] | striptags  }}</p>
-    </div>
+    <li class="alert alert-info">
+       <p><h2><a href="{{url_for('show_post', alias=p.url)}}"> {{p.title}}</a></h2>
+       <p >{{ p.intro  }}</p>
+
     </li>
     {% endfor %}
 </ul>
 
+</div>
 {% endblock %}
 
 
