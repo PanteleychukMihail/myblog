@@ -20,9 +20,8 @@ I used for my Project:
 For using this project you have to:
 1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
+   git clone https://github.com/PanteleychukMihail/myblog/tree/master
+3. Install all packages from 
    ```sh
    npm install
    ```
